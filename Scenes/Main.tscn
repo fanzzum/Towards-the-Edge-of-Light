@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://x6e0pm3ougu8"]
+
+[ext_resource type="PackedScene" uid="uid://galiymsptp1r" path="res://Scenes/Flight/Planet.tscn" id="1_idj7w"]
+[ext_resource type="PackedScene" uid="uid://d3soghehntgbt" path="res://Scenes/Flight/Ship.tscn" id="2_kln2b"]
+
+[node name="Main" type="Node2D"]
+
+[node name="Planet" parent="." instance=ExtResource("1_idj7w")]
+
+[node name="Ship" parent="." instance=ExtResource("2_kln2b")]
+position = Vector2(91, -1)
+
+[node name="Camera2D" type="Camera2D" parent="Ship"]
+position = Vector2(-91, 1)

@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://d3soghehntgbt"]
+
+[ext_resource type="Script" uid="uid://d2beika8usjbv" path="res://Scripts/Ship.gd" id="1_ln1di"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ln1di"]
+size = Vector2(28, 26)
+
+[node name="Ship" type="CharacterBody2D"]
+script = ExtResource("1_ln1di")
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+position = Vector2(8, 8.000001)
+rotation = 0.071936466
+scale = Vector2(0.2914707, 0.3316444)
+polygon = PackedVector2Array(-39, -61, -73, 20, 13, 14)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_ln1di")
+
+[node name="TrajectoryLine" type="Line2D" parent="."]
+width = 2.0
+default_color = Color(0, 1, 1, 1)
