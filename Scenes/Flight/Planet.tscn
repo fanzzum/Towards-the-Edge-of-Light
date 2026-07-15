@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://galiymsptp1r"]
+[gd_scene load_steps=5 format=3 uid="uid://galiymsptp1r"]
 
 [ext_resource type="Script" uid="uid://datugwac7eqeo" path="res://Scripts/Planet.gd" id="1_0euib"]
 [ext_resource type="Texture2D" uid="uid://wlq2q1mbxhhb" path="res://Resources/Sprite/mercury.png" id="2_ysqwj"]
+[ext_resource type="Script" uid="uid://bt5vrwbvfby73" path="res://Scripts/LandingRadius.gd" id="3_ysqwj"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_l7g4c"]
 radius = 71.11259
@@ -18,3 +19,6 @@ texture = ExtResource("2_ysqwj")
 position = Vector2(-2, -2.2737368e-13)
 scale = Vector2(0.99999994, 0.99999994)
 shape = SubResource("CircleShape2D_l7g4c")
+
+[node name="LandingRadius" type="Node2D" parent="."]
+script = ExtResource("3_ysqwj")

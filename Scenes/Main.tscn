@@ -1,14 +1,41 @@
-[gd_scene load_steps=3 format=3 uid="uid://x6e0pm3ougu8"]
+[gd_scene load_steps=8 format=3 uid="uid://x6e0pm3ougu8"]
 
 [ext_resource type="PackedScene" uid="uid://galiymsptp1r" path="res://Scenes/Flight/Planet.tscn" id="1_idj7w"]
 [ext_resource type="PackedScene" uid="uid://d3soghehntgbt" path="res://Scenes/Flight/Ship.tscn" id="2_kln2b"]
+[ext_resource type="Script" uid="uid://dbpukwhq0qh2h" path="res://Scripts/PlanetData.gd" id="2_pbw6q"]
+[ext_resource type="Script" uid="uid://bq51nwbgaqdcb" path="res://Scripts/DebugHUD.gd" id="3_kln2b"]
+[ext_resource type="Script" uid="uid://n26yt6tck66o" path="res://Scripts/CameraController.gd" id="4_rgh2o"]
+[ext_resource type="Script" uid="uid://cbroofln0iv5r" path="res://Scripts/LandingPrompt.gd" id="6_v1gob"]
+
+[sub_resource type="Resource" id="Resource_v1gob"]
+script = ExtResource("2_pbw6q")
+metadata/_custom_type_script = "uid://dbpukwhq0qh2h"
 
 [node name="Main" type="Node2D"]
 
 [node name="Planet" parent="." instance=ExtResource("1_idj7w")]
+data = SubResource("Resource_v1gob")
 
 [node name="Ship" parent="." instance=ExtResource("2_kln2b")]
-position = Vector2(91, -1)
+position = Vector2(496, -237)
 
-[node name="Camera2D" type="Camera2D" parent="Ship"]
-position = Vector2(-91, 1)
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="DebugHUD" type="Label" parent="CanvasLayer" node_paths=PackedStringArray("ship")]
+offset_right = 40.0
+offset_bottom = 23.0
+script = ExtResource("3_kln2b")
+ship = NodePath("../../Ship")
+
+[node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("target")]
+position = Vector2(405, -236)
+script = ExtResource("4_rgh2o")
+target = NodePath("../Ship")
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+
+[node name="LandingPrompt" type="Label" parent="CanvasLayer2" node_paths=PackedStringArray("ship")]
+offset_right = 40.0
+offset_bottom = 23.0
+script = ExtResource("6_v1gob")
+ship = NodePath("../../Ship")
