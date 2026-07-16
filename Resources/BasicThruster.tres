@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="ShipPart" load_steps=2 format=3 uid="uid://byslwhh46g5c2"]
+
+[ext_resource type="Script" uid="uid://jpox0wadtk7m" path="res://Scripts/Data/ShipPart.gd" id="1_ps2qe"]
+
+[resource]
+script = ExtResource("1_ps2qe")
+part_name = "Basic Thruster"
+mass = 3.0
+thrust = 10.0

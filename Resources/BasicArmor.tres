@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="ShipPart" load_steps=2 format=3 uid="uid://bm45o3ylncnqx"]
+
+[ext_resource type="Script" uid="uid://jpox0wadtk7m" path="res://Scripts/Data/ShipPart.gd" id="1_moesc"]
+
+[resource]
+script = ExtResource("1_moesc")
+part_name = "Basic Armor"
+part_type = 3
+mass = 3.0
+stability = 4.0

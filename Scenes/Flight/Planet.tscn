@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://galiymsptp1r"]
+[gd_scene load_steps=6 format=3 uid="uid://galiymsptp1r"]
 
 [ext_resource type="Script" uid="uid://datugwac7eqeo" path="res://Scripts/Planet.gd" id="1_0euib"]
 [ext_resource type="Texture2D" uid="uid://wlq2q1mbxhhb" path="res://Resources/Sprite/mercury.png" id="2_ysqwj"]
 [ext_resource type="Script" uid="uid://bt5vrwbvfby73" path="res://Scripts/LandingRadius.gd" id="3_ysqwj"]
+[ext_resource type="Texture2D" uid="uid://6jtfg66u3u8n" path="res://Resources/Sprite/circle.png" id="4_l7g4c"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_l7g4c"]
 radius = 71.11259
@@ -22,3 +23,11 @@ shape = SubResource("CircleShape2D_l7g4c")
 
 [node name="LandingRadius" type="Node2D" parent="."]
 script = ExtResource("3_ysqwj")
+
+[node name="OrbitVisual" type="Sprite2D" parent="."]
+position = Vector2(-4, 3)
+scale = Vector2(0.1734375, 0.1734375)
+texture = ExtResource("4_l7g4c")
+
+[node name="SurfaceVisual" type="Node2D" parent="."]
+modulate = Color(1, 1, 1, 0)

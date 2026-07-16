@@ -1,0 +1,6 @@
+[gd_resource type="Resource" script_class="ShipPart" load_steps=2 format=3 uid="uid://30ohv4ua1w8d"]
+
+[ext_resource type="Script" uid="uid://jpox0wadtk7m" path="res://Scripts/Data/ShipPart.gd" id="1_0ntqw"]
+
+[resource]
+script = ExtResource("1_0ntqw")

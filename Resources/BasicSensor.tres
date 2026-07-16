@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="ShipPart" load_steps=2 format=3 uid="uid://4kkvddwy2g2p"]
+
+[ext_resource type="Script" uid="uid://jpox0wadtk7m" path="res://Scripts/Data/ShipPart.gd" id="1_568ak"]
+
+[resource]
+script = ExtResource("1_568ak")
+part_name = "Basic Sensor"
+part_type = 1
+mass = 1.0
+sensor_quality = 1.0
