@@ -1,12 +1,44 @@
-[gd_scene load_steps=4 format=3 uid="uid://c22xlrpseolin"]
+[gd_scene load_steps=12 format=3 uid="uid://c22xlrpseolin"]
 
 [ext_resource type="Script" uid="uid://0g2nuksesa7s" path="res://Scripts/Hub/Hub.gd" id="1_ui5d8"]
 [ext_resource type="PackedScene" uid="uid://galiymsptp1r" path="res://Scenes/Flight/Planet.tscn" id="2_b4vk3"]
+[ext_resource type="Script" uid="uid://dbpukwhq0qh2h" path="res://Scripts/PlanetData.gd" id="3_ffnsu"]
 [ext_resource type="PackedScene" uid="uid://d3soghehntgbt" path="res://Scenes/Flight/Ship.tscn" id="3_qgjls"]
+[ext_resource type="Resource" uid="uid://4x7xbi2n03hx" path="res://Resources/DefaultShip.tres" id="4_b4vk3"]
+[ext_resource type="Texture2D" uid="uid://dhegdn1vq4yc3" path="res://Resources/Sprite/terrain.png" id="4_hgw2t"]
+[ext_resource type="Script" uid="uid://bq51nwbgaqdcb" path="res://Scripts/DebugHUD.gd" id="5_qgjls"]
+[ext_resource type="Script" uid="uid://n26yt6tck66o" path="res://Scripts/CameraController.gd" id="6_jip3a"]
+[ext_resource type="Resource" uid="uid://cbpon6prcdbpc" path="res://Resources/AresPlanet.tres" id="8_rxhug"]
+[ext_resource type="Texture2D" uid="uid://cr37bn3upveq6" path="res://Resources/Sprite/rockyTerrain.png" id="10_7ff6l"]
+
+[sub_resource type="Resource" id="Resource_rxhug"]
+script = ExtResource("3_ffnsu")
+gravity_strength = 20000000.0
+metadata/_custom_type_script = "uid://dbpukwhq0qh2h"
 
 [node name="Hub" type="Node2D"]
 script = ExtResource("1_ui5d8")
 
 [node name="HomePlanet" parent="." instance=ExtResource("2_b4vk3")]
+data = SubResource("Resource_rxhug")
+diorama_texture = ExtResource("4_hgw2t")
 
 [node name="Ship" parent="." instance=ExtResource("3_qgjls")]
+ship_data = ExtResource("4_b4vk3")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Label" type="Label" parent="CanvasLayer" node_paths=PackedStringArray("ship")]
+offset_right = 40.0
+offset_bottom = 23.0
+script = ExtResource("5_qgjls")
+ship = NodePath("../../Ship")
+
+[node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("target") groups=["camera"]]
+script = ExtResource("6_jip3a")
+target = NodePath("../Ship")
+
+[node name="AlienPlanet" parent="." instance=ExtResource("2_b4vk3")]
+position = Vector2(-1071, 0)
+data = ExtResource("8_rxhug")
+diorama_texture = ExtResource("10_7ff6l")

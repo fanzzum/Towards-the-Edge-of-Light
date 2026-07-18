@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="PlanetData" load_steps=2 format=3 uid="uid://cbpon6prcdbpc"]
+
+[ext_resource type="Script" uid="uid://dbpukwhq0qh2h" path="res://Scripts/PlanetData.gd" id="1_ejad8"]
+
+[resource]
+script = ExtResource("1_ejad8")
+planet_name = "Ares"
+gravity_strength = 500000.0
+metadata/_custom_type_script = "uid://dbpukwhq0qh2h"

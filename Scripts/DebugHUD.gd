@@ -20,4 +20,12 @@ func _process(_delta):
 	text += "\n"
 	text += "Mass: %.1f\n" % ship.ship_stats.total_mass
 	text += "Thrust: %.1f\n" % ship.ship_stats.total_thrust
-	text += "State: %s" % ship.ShipState.keys()[ship.current_state]
+	
+	# NEW: Track cargo and scanner instead of the deleted state machine
+	text += "Scan Progress: %.1f%%\n" % ((ship.scan_timer / ship.scan_duration) * 100.0)
+	text += "Cargo: Ti:%d | Ld:%d | Ag:%d | Cu:%d" % [
+		ship.cargo["titanium"], 
+		ship.cargo["lead"], 
+		ship.cargo["silver"], 
+		ship.cargo["copper"]
+	]

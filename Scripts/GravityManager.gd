@@ -26,7 +26,7 @@ func calculate_gravity(position: Vector2) -> Vector2:
 		if distance > planet.gravity_radius:
 			continue
 
-		var gravity = planet.gravity_strength / max(distance * distance, 100)
+		var gravity = planet.gravity_strength / max(distance, 10.0)
 		total_force += direction.normalized() * gravity
 
 	return total_force

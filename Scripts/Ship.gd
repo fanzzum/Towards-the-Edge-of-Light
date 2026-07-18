@@ -3,10 +3,14 @@ extends CharacterBody2D
 # ===== Movement =====
 var launch_data := LaunchData.new()
 var ship_stats := ShipStats.new()
+var hp: float = 100.0
+var armor_threshold: float = 200.0
 
 const ExplorerScene = preload("res://Scenes/Character/Explorer.tscn")
 var spawned_explorer: CharacterBody2D = null
-
+var cargo: Dictionary = {"titanium": 0, "lead": 0, "silver": 0, "copper": 0}
+var scan_timer: float = 0.0
+var scan_duration: float = 2.0
 
 @export var rotation_speed := 1.25
 
@@ -24,15 +28,6 @@ var spawned_explorer: CharacterBody2D = null
 
 
 
-
-
-enum ShipState {
-	LAUNCH,
-	FLIGHT,
-	LANDING,
-	LANDED
-}
-var current_state = ShipState.FLIGHT
 var velocity_vector: Vector2 = Vector2.ZERO
 
 
@@ -41,48 +36,68 @@ func _ready() -> void:
 
 
 
-
 func _physics_process(delta):
 	update_ship_stats()
-	
-	if current_state == ShipState.FLIGHT:
-		handle_rotation(delta)
-		handle_thrust(delta)
-		apply_planet_gravity(delta)
-		draw_trajectory()
-		
-		if Input.is_action_just_pressed("initiate_landing"):
-			var planet = GravityManager.can_land(global_position)
-			if planet:
-				current_state = ShipState.LANDING
-				GravityManager.exclusive_gravity_planet = planet
-				planet.is_landing_target = true
-				get_tree().call_group("camera", "set_landing_mode", true)
-				trajectory_line.clear_points()
-				
-	elif current_state == ShipState.LANDING:
-		var target = GravityManager.exclusive_gravity_planet
-		if target:
-			var direction_to_planet = global_position.direction_to(target.global_position)
-			
-			# Smoothly guide down and arrest sideways velocity
-			velocity_vector = velocity_vector.lerp(direction_to_planet * 100.0, delta * 2.0)
-			
-			var distance = global_position.distance_to(target.global_position)
-			# Add a larger buffer (e.g., + 25.0 pixels) so it registers right on structural impact
-			var landing_threshold = target.planet_radius + 25.0
-			
-			if distance <= landing_threshold:
-				current_state = ShipState.LANDED
-				velocity_vector = Vector2.ZERO
-				spawn_explorer()
+
+	handle_rotation(delta)
+	apply_planet_gravity(delta)
+	handle_thrust(delta)
+	draw_trajectory()
 
 	velocity = velocity_vector
 	move_and_slide()
+	if get_slide_collision_count() > 0:
+		var collision = get_slide_collision(0)
+		handle_impact(velocity_vector)
+		# Bounce slightly off the rock/planet
+		velocity_vector = velocity_vector.bounce(collision.get_normal()) * 0.5
 	velocity_vector = velocity
 
 
+func handle_impact(impact_velocity: Vector2):
+	var impact_speed = impact_velocity.length()
+	var impact_force = ship_stats.total_mass * impact_speed
+	
+	var damage = max(0, impact_force - armor_threshold)
+	
+	if damage > 0:
+		hp -= damage
+		print("Took damage: ", damage, " | HP left: ", hp)
+		
+		if hp <= 0:
+			trigger_destruction()
 
+func trigger_destruction():
+	print("Ship destroyed! Returning home...")
+	cargo = {"titanium": 0, "lead": 0, "silver": 0, "copper": 0} 
+	hp = 100.0
+	velocity_vector = Vector2.ZERO
+	# global_position = Vector2(0, 0) # Replace with exact Home pad coordinates
+
+
+func _process(delta):
+	# Find if we are inside any planet's scan zone
+	var scannable_planet = null
+	for planet in GravityManager.planets:
+		if planet.is_player_in_range and planet.is_scannable:
+			scannable_planet = planet
+			break
+
+	# Handle the hold-to-scan timer
+	if scannable_planet:
+		if Input.is_action_pressed("scan"):
+			scan_timer += delta
+			# Optional: Print to console so you can see it working before we make a UI
+			print("Scanning... ", round((scan_timer / scan_duration) * 100), "%")
+
+			if scan_timer >= scan_duration:
+				complete_scan(scannable_planet)
+		else:
+			scan_timer = 0.0 # Reset if button released
+	else:
+		scan_timer = 0.0
+		
+		
 
 func handle_rotation(delta):
 
@@ -110,34 +125,36 @@ func apply_planet_gravity(delta):
 		
 
 func draw_trajectory():
-
 	trajectory_line.clear_points()
-
 	var simulated_position = global_position
 	var simulated_velocity = velocity_vector
-
 	var dt = 1.0 / 60.0
 
-	for i in range(trajectory_steps):
+	# 1. Create a radar fade effect (Cyan to Transparent)
+	var fade_gradient = Gradient.new()
+	fade_gradient.set_color(0, Color(0, 1, 1, 1)) # Solid at the ship
+	fade_gradient.set_color(1, Color(0, 1, 1, 0)) # Invisible at the end
+	trajectory_line.gradient = fade_gradient
 
+	# 2. Limit prediction distance based on Sensor Quality
+	# Base 50 steps for free, plus extra steps based on your sensors, capped at your max
+	var max_active_steps = int(clamp(50 + (ship_stats.sensor_quality * 10), 50, trajectory_steps))
+
+	for i in range(max_active_steps):
 		simulated_velocity += GravityManager.calculate_gravity(simulated_position) * dt
-
 		simulated_position += simulated_velocity * dt
-
+		
 		trajectory_line.add_point(to_local(simulated_position))
 
 		var hit = false
-
 		for planet in GravityManager.planets:
-
-			if simulated_position.distance_to(planet.global_position) <= planet.planet_radius:
-
+			# Added the 6.0 multiplier here to account for your new 6x scale!
+			if simulated_position.distance_to(planet.global_position) <= (planet.planet_radius * 6.0):
 				hit = true
 				break
 
 		if hit:
 			break
-
 
 
 
@@ -205,24 +222,20 @@ func calculate_moment_of_inertia():
 			distance *
 			distance
 		)
-
-
-
-func spawn_explorer():
-	if spawned_explorer != null:
-		return
 		
-	spawned_explorer = ExplorerScene.instantiate()
-	get_tree().current_scene.add_child(spawned_explorer) 
-	spawned_explorer.global_position = global_position
-	spawned_explorer.is_active = true
-	
-	get_tree().call_group("camera", "set_target", spawned_explorer)
+		
+		
+func complete_scan(planet):
+	scan_timer = 0.0
+	planet.is_scannable = false # Prevents infinite farming of the same planet
 
+	# Add the hardcoded materials to the ship's cargo
+	if planet.data and planet.data.scan_rewards:
+		cargo["titanium"] += planet.data.scan_rewards.titanium
+		cargo["lead"] += planet.data.scan_rewards.lead
+		cargo["silver"] += planet.data.scan_rewards.silver
+		cargo["copper"] += planet.data.scan_rewards.copper
 
-func restore_ship_visibility():
-	if has_node("Sprite2D"):
-		get_node("Sprite2D").visible = true
-	for child in get_children():
-		if child is Sprite2D:
-			child.visible = true
+		print("Scan complete! Current Cargo: ", cargo)
+	else:
+		print("Scan complete, but this planet has no MaterialData assigned!")

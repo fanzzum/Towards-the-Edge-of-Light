@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://7jax5bm8x85j"]
+
+[ext_resource type="Texture2D" uid="uid://dva2kr76uqfxa" path="res://Resources/Sprite/treasure.png" id="1_h5gk7"]
+[ext_resource type="Script" uid="uid://bcbi5rfji70io" path="res://Scripts/Ruin.gd" id="1_y0fud"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h5gk7"]
+size = Vector2(91, 74)
+
+[node name="Ruin" type="Area2D"]
+script = ExtResource("1_y0fud")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-0.9999962, 1.5258789e-05)
+scale = Vector2(0.049399994, 0.049399994)
+texture = ExtResource("1_h5gk7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-3.5, 2)
+shape = SubResource("RectangleShape2D_h5gk7")

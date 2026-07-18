@@ -1,6 +1,6 @@
 class_name PlanetData
 extends Resource
-
+@export var scan_rewards: MaterialData
 @export var planet_name: String
 @export var gravity_strength := 50000000.0
 @export var gravity_radius := 800.0

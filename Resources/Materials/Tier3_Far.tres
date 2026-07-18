@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="MaterialData" load_steps=2 format=3 uid="uid://w0x5wl7uwhsx"]
+
+[ext_resource type="Script" uid="uid://d23sw61u01h5q" path="res://Resources/MaterialData.gd" id="1_j13r3"]
+
+[resource]
+script = ExtResource("1_j13r3")
+lead = 5
+silver = 6
+metadata/_custom_type_script = "uid://d23sw61u01h5q"

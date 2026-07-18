@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="ShipData" load_steps=14 format=3 uid="uid://4x7xbi2n03hx"]
+[gd_resource type="Resource" script_class="ShipData" load_steps=15 format=3 uid="uid://4x7xbi2n03hx"]
 
 [ext_resource type="Script" uid="uid://dadxvgn1ynbik" path="res://Scripts/Data/ShipData.gd" id="1_s106s"]
 [ext_resource type="Script" uid="uid://bhon85exanspx" path="res://Scripts/Data/ShipSocket.gd" id="2_0quau"]
@@ -7,6 +7,7 @@
 [ext_resource type="Resource" uid="uid://bsor8c3u1evdj" path="res://Resources/BasicFin.tres" id="5_evxw4"]
 [ext_resource type="Resource" uid="uid://bm45o3ylncnqx" path="res://Resources/BasicArmor.tres" id="6_tf574"]
 [ext_resource type="Resource" uid="uid://30ohv4ua1w8d" path="res://Resources/BasicLandingGear.tres" id="7_8hcpy"]
+[ext_resource type="Script" uid="uid://jpox0wadtk7m" path="res://Scripts/Data/ShipPart.gd" id="8_evxw4"]
 
 [sub_resource type="Resource" id="Resource_73hu2"]
 script = ExtResource("2_0quau")

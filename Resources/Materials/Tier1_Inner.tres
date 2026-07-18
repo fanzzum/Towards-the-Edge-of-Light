@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="MaterialData" load_steps=2 format=3 uid="uid://wxm7te54vas"]
+
+[ext_resource type="Script" uid="uid://d23sw61u01h5q" path="res://Resources/MaterialData.gd" id="1_2fyc6"]
+
+[resource]
+script = ExtResource("1_2fyc6")
+titanium = 5
+copper = 3
+metadata/_custom_type_script = "uid://d23sw61u01h5q"

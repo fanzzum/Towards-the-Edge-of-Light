@@ -1,21 +1,32 @@
-[gd_scene load_steps=9 format=3 uid="uid://x6e0pm3ougu8"]
+[gd_scene load_steps=26 format=3 uid="uid://x6e0pm3ougu8"]
 
 [ext_resource type="PackedScene" uid="uid://galiymsptp1r" path="res://Scenes/Flight/Planet.tscn" id="1_idj7w"]
 [ext_resource type="PackedScene" uid="uid://d3soghehntgbt" path="res://Scenes/Flight/Ship.tscn" id="2_kln2b"]
-[ext_resource type="Script" uid="uid://dbpukwhq0qh2h" path="res://Scripts/PlanetData.gd" id="2_pbw6q"]
 [ext_resource type="Script" uid="uid://bq51nwbgaqdcb" path="res://Scripts/DebugHUD.gd" id="3_kln2b"]
 [ext_resource type="Resource" uid="uid://4x7xbi2n03hx" path="res://Resources/DefaultShip.tres" id="4_jw32o"]
 [ext_resource type="Script" uid="uid://n26yt6tck66o" path="res://Scripts/CameraController.gd" id="4_rgh2o"]
-[ext_resource type="Script" uid="uid://dlqo6eawivef" path="res://Scripts/UI/LandingPrompt.gd" id="6_jw32o"]
-
-[sub_resource type="Resource" id="Resource_v1gob"]
-script = ExtResource("2_pbw6q")
-metadata/_custom_type_script = "uid://dbpukwhq0qh2h"
+[ext_resource type="Script" uid="uid://yjr40w8pm6mb" path="res://Scripts/Managers/WorldGenerator.gd" id="7_jw32o"]
+[ext_resource type="Texture2D" uid="uid://dg1q25au136h7" path="res://Assets/Planets/Planet_0.png" id="8_grg3l"]
+[ext_resource type="Texture2D" uid="uid://cvt4f1hajngmg" path="res://Assets/Planets/Planet_1.png" id="9_frkhe"]
+[ext_resource type="Texture2D" uid="uid://d4dnggmsx23io" path="res://Assets/Planets/Planet_2.png" id="10_1p5hy"]
+[ext_resource type="Texture2D" uid="uid://b5l16dwhmvsqh" path="res://Assets/Planets/Planet_3.png" id="11_h1m7h"]
+[ext_resource type="Texture2D" uid="uid://b3inupvk0rppl" path="res://Assets/Planets/Planet_4.png" id="12_erwvk"]
+[ext_resource type="Texture2D" uid="uid://bwd6fgdgpmjh4" path="res://Assets/Planets/Planet_5.png" id="13_aht7i"]
+[ext_resource type="Texture2D" uid="uid://c57guevhqsju4" path="res://Assets/Planets/Planet_6.png" id="14_5jffn"]
+[ext_resource type="Texture2D" uid="uid://ccpxegvr2jmsk" path="res://Assets/Planets/Planet_7.png" id="15_kpo4j"]
+[ext_resource type="Texture2D" uid="uid://dlhi5ksd5k80q" path="res://Assets/Planets/Planet_8.png" id="16_4n42c"]
+[ext_resource type="Texture2D" uid="uid://0utxt3lav8wl" path="res://Assets/Planets/Planet_9.png" id="17_c5snn"]
+[ext_resource type="Texture2D" uid="uid://c360eixspkmw1" path="res://Assets/Planets/Planet_10.png" id="18_xvtyr"]
+[ext_resource type="Texture2D" uid="uid://bjrenscbpd5ad" path="res://Assets/Planets/Planet_11.png" id="19_u7mjy"]
+[ext_resource type="Texture2D" uid="uid://cjjwoch6vlyug" path="res://Assets/Planets/Planet_12.png" id="20_4yxf6"]
+[ext_resource type="Texture2D" uid="uid://dj5tdf71gknct" path="res://Assets/Planets/Planet_13.png" id="21_qta6b"]
+[ext_resource type="Texture2D" uid="uid://bair3gr0knv5" path="res://Assets/Planets/Planet_14.png" id="22_x3rx7"]
+[ext_resource type="Texture2D" uid="uid://lnj6kjb6pj7g" path="res://Assets/Planets/Planet_15.png" id="23_6heos"]
+[ext_resource type="Texture2D" uid="uid://5usilxk8vt0x" path="res://Assets/Stars/Star_0.png" id="24_vvnwx"]
+[ext_resource type="Texture2D" uid="uid://vofku81yvsi7" path="res://Assets/Stars/Star_1.png" id="25_btbly"]
+[ext_resource type="Texture2D" uid="uid://b4ngjumnp4epj" path="res://Assets/Stars/Star_2.png" id="26_vs04g"]
 
 [node name="Main" type="Node2D"]
-
-[node name="Planet" parent="." instance=ExtResource("1_idj7w")]
-data = SubResource("Resource_v1gob")
 
 [node name="Ship" parent="." instance=ExtResource("2_kln2b")]
 position = Vector2(496, -237)
@@ -29,13 +40,13 @@ offset_bottom = 23.0
 script = ExtResource("3_kln2b")
 ship = NodePath("../../Ship")
 
-[node name="LandingPrompt" type="Label" parent="CanvasLayer"]
-offset_right = 40.0
-offset_bottom = 23.0
-text = " Initiate Landing"
-script = ExtResource("6_jw32o")
-
 [node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("target") groups=["camera"]]
 position = Vector2(405, -236)
 script = ExtResource("4_rgh2o")
 target = NodePath("../Ship")
+
+[node name="WorldGenerator" type="Node" parent="."]
+script = ExtResource("7_jw32o")
+planet_scene = ExtResource("1_idj7w")
+planet_textures = Array[Texture2D]([ExtResource("8_grg3l"), ExtResource("9_frkhe"), ExtResource("10_1p5hy"), ExtResource("11_h1m7h"), ExtResource("12_erwvk"), ExtResource("13_aht7i"), ExtResource("14_5jffn"), ExtResource("15_kpo4j"), ExtResource("16_4n42c"), ExtResource("17_c5snn"), ExtResource("18_xvtyr"), ExtResource("19_u7mjy"), ExtResource("20_4yxf6"), ExtResource("21_qta6b"), ExtResource("22_x3rx7"), ExtResource("23_6heos")])
+star_textures = Array[Texture2D]([ExtResource("24_vvnwx"), ExtResource("25_btbly"), ExtResource("26_vs04g")])
