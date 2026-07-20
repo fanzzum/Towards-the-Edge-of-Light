@@ -6,15 +6,9 @@
 script = ExtResource("1_4ygj8")
 
 [node name="Panel" type="Panel" parent="."]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -400.0
-offset_top = -300.0
-offset_right = 400.0
-offset_bottom = 300.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -25,12 +19,14 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -196.0
+offset_left = -221.5
 offset_top = -68.0
-offset_right = 196.0
+offset_right = 221.5
 offset_bottom = 68.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/h_separation = 20
+theme_override_constants/v_separation = 30
 columns = 3
 
 [node name="thruster_power" type="Button" parent="Panel/GridContainer"]
@@ -80,6 +76,20 @@ text = "Cargo Utility"
 [node name="utility_battery" type="Button" parent="Panel/GridContainer"]
 layout_mode = 2
 text = "Battery Utility"
+
+[node name="StatusLabel" type="Label" parent="Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
 
 [connection signal="pressed" from="Panel/GridContainer/thruster_power" to="." method="_on_part_pressed" binds= ["thruster_power"]]
 [connection signal="pressed" from="Panel/GridContainer/thruster_vector" to="." method="_on_part_pressed" binds= ["thruster_vector"]]

@@ -17,19 +17,25 @@ func calculate_gravity(position: Vector2) -> Vector2:
 		if exclusive_gravity_planet != null and planet != exclusive_gravity_planet:
 			continue
 
+		# Skip objects with 0 or missing gravity radius/strength
+		var radius = planet.get("gravity_radius")
+		var strength = planet.get("gravity_strength")
+		if radius == null or strength == null or radius <= 0.0 or strength <= 0.0:
+			continue
+
 		var direction = planet.global_position - position
 		var distance = direction.length()
 
-		if distance < 10:
+		if distance < 10 or distance > radius:
 			continue
 
-		if distance > planet.gravity_radius:
-			continue
-
-		var gravity = planet.gravity_strength / max(distance, 10.0)
+		var gravity = strength / max(distance, 10.0)
 		total_force += direction.normalized() * gravity
 
 	return total_force
+
+
+
 	
 func get_closest_planet(position: Vector2):
 	var closest = null

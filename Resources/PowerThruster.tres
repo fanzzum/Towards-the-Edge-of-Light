@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ShipPart" load_steps=3 format=3 uid="uid://de8yv7ir4edaq"]
+
+[ext_resource type="Script" uid="uid://jpox0wadtk7m" path="res://Scripts/Data/ShipPart.gd" id="1_5pgyt"]
+[ext_resource type="Texture2D" uid="uid://276eblmrcjmr" path="res://Resources/Sprite/Icon31_08.png" id="1_v5lh1"]
+
+[resource]
+script = ExtResource("1_5pgyt")
+icon = ExtResource("1_v5lh1")
+part_name = "Power Thruster"
+mass = 5.5
+thrust = 18.0

@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://ur74lfngl30u"]
+
+[ext_resource type="AudioStream" uid="uid://coax14wx6fywl" path="res://Art/2. Satellite Interruption.wav" id="1_d5dbg"]
+[ext_resource type="Script" uid="uid://cji8t74ldxhnj" path="res://Scenes/global_music.gd" id="2_2rtk3"]
+
+[node name="GlobalMusic" type="AudioStreamPlayer"]
+stream = ExtResource("1_d5dbg")
+volume_db = 4.439
+autoplay = true
+script = ExtResource("2_2rtk3")

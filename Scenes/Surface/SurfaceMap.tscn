@@ -1,15 +1,24 @@
-[gd_scene load_steps=7 format=3 uid="uid://ct281e3p1r8gf"]
+[gd_scene load_steps=12 format=3 uid="uid://ct281e3p1r8gf"]
 
 [ext_resource type="PackedScene" uid="uid://bdoilwm3aluyj" path="res://Scenes/Character/Explorer.tscn" id="1_aqv3d"]
+[ext_resource type="Texture2D" uid="uid://b0lau65fyangc" path="res://Art/Untitled_Artwork 3.png" id="1_wjc75"]
 [ext_resource type="PackedScene" uid="uid://be3h7hqx566ak" path="res://Scenes/Interactables/Fabricator.tscn" id="2_hnmqg"]
 [ext_resource type="Script" uid="uid://bvmcnh7gnkaqt" path="res://Scripts/Interactables/LaunchPad.gd" id="3_drmo3"]
+[ext_resource type="Texture2D" uid="uid://xa0c8gw7mbgn" path="res://Art/Untitled_Artwork 2.png" id="4_sgcth"]
 [ext_resource type="Script" uid="uid://bq51nwbgaqdcb" path="res://Scripts/DebugHUD.gd" id="4_y52hp"]
+[ext_resource type="Texture2D" uid="uid://cll1qmyv1e6uu" path="res://Resources/Sprite/spacebg2.jpeg" id="5_jj3vh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ntbs5"]
 size = Vector2(1637, 145)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wjc75"]
+size = Vector2(105, 772)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2olwe"]
+size = Vector2(183, 794)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hnmqg"]
-size = Vector2(83, 127)
+size = Vector2(97, 56)
 
 [node name="SurfaceMap" type="Node2D"]
 
@@ -19,40 +28,66 @@ size = Vector2(83, 127)
 position = Vector2(686.5, 687.5)
 shape = SubResource("RectangleShape2D_ntbs5")
 
-[node name="ColorRect" type="ColorRect" parent="Ground"]
-offset_left = -132.0
-offset_top = 622.0
-offset_right = 1506.0
-offset_bottom = 758.0
+[node name="Sprite2D" type="Sprite2D" parent="Ground"]
+position = Vector2(643, 171)
+scale = Vector2(0.54695123, 0.7164634)
+texture = ExtResource("1_wjc75")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Ground"]
+position = Vector2(-31.5, 376)
+shape = SubResource("RectangleShape2D_wjc75")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Ground"]
+position = Vector2(1367, 358)
+shape = SubResource("RectangleShape2D_2olwe")
 
 [node name="Explorer" parent="." instance=ExtResource("1_aqv3d")]
 position = Vector2(557, 489)
 
 [node name="Fabricator" parent="." instance=ExtResource("2_hnmqg")]
-position = Vector2(982, 476)
+position = Vector2(973, 501)
 
 [node name="LaunchPad" type="Area2D" parent="."]
 position = Vector2(1222, 570)
 script = ExtResource("3_drmo3")
 
-[node name="ColorRect" type="ColorRect" parent="LaunchPad"]
-offset_left = -30.0
-offset_top = -27.0
-offset_right = 34.0
-offset_bottom = 37.0
-color = Color(0.53999996, 0.5553333, 1, 1)
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LaunchPad"]
-position = Vector2(4.5, -21.5)
+position = Vector2(3.5, 14)
 shape = SubResource("RectangleShape2D_hnmqg")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="LaunchPad"]
+position = Vector2(14, -32.999992)
+rotation = 0.06414793
+scale = Vector2(0.51666665, 0.48999995)
+texture = ExtResource("4_sgcth")
 
-[node name="Label" type="Label" parent="CanvasLayer"]
+[node name="Label" type="Label" parent="LaunchPad"]
+visible = false
+offset_left = -100.0
+offset_top = -78.0
+offset_right = 53.0
+offset_bottom = -55.0
+text = "Press F to Kick Off"
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="DeepSpaceStars" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0, 0)
+
+[node name="TextureRect" type="TextureRect" parent="ParallaxBackground/DeepSpaceStars"]
+offset_right = 1283.5555
+offset_bottom = 722.0
+texture = ExtResource("5_jj3vh")
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="DebugHUD" type="Label" parent="HUD" node_paths=PackedStringArray("ship")]
 offset_right = 40.0
 offset_bottom = 23.0
 script = ExtResource("4_y52hp")
+ship = NodePath("")
 
 [connection signal="body_entered" from="Fabricator" to="Fabricator" method="_on_body_entered"]
 [connection signal="body_exited" from="Fabricator" to="Fabricator" method="_on_body_exited"]
 [connection signal="body_entered" from="LaunchPad" to="LaunchPad" method="_on_body_entered"]
+[connection signal="body_exited" from="LaunchPad" to="LaunchPad" method="_on_body_exited"]

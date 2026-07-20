@@ -1,0 +1,59 @@
+[gd_scene load_steps=2 format=3 uid="uid://d2vbt7kq0w28r"]
+
+[ext_resource type="Script" uid="uid://cr2dl6u3w1k1s" path="res://Scenes/intro_screen.gd" id="1_kydkq"]
+
+[node name="IntroScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_kydkq")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 1290.0
+offset_bottom = 736.0
+color = Color(0.11, 0.12833332, 0.22, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 50
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 55.0
+offset_top = 50.0
+offset_right = 1179.0
+offset_bottom = 412.0
+grow_horizontal = 2
+alignment = 1
+
+[node name="StoryText" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "SYSTEM REBOOT INITIATED...
+CRASH IMMINENT...
+
+Your vessel is destroyed. You are stranded in an uncharted sector.
+
+Using the wreckage, you have managed to build a makeshift Fabricator and a crude Launchpad. It isn't much, but it's your only ticket off this rock.
+
+Scan nearby worlds. Scavenge for Titanium, Lead, Silver, and Copper. Upgrade your ship's thrusters, sensors, and hull.
+
+Survive the jump from world to world. Find the final beacon.
+
+Find your way home."
+horizontal_alignment = 1
+
+[node name="PromptText" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "[ Press ENTER to begin ]
+"

@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=3 uid="uid://cfq31xsavok4j"]
+
+[ext_resource type="Script" uid="uid://cm4rb5fxe6ir2" path="res://Scripts/Interactables/Beacon.gd" id="1_0qkpf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kr11o"]
+size = Vector2(74, 63)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0qkpf"]
+radius = 215.8379
+
+[node name="Beacon" type="StaticBody2D"]
+script = ExtResource("1_0qkpf")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(35, 29.5)
+shape = SubResource("RectangleShape2D_kr11o")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 71.0
+offset_bottom = 61.0
+
+[node name="ScanZone" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ScanZone"]
+position = Vector2(33, 31)
+shape = SubResource("CircleShape2D_0qkpf")
+
+[connection signal="body_entered" from="ScanZone" to="." method="_on_body_entered"]
+[connection signal="body_exited" from="ScanZone" to="." method="_on_body_exited"]

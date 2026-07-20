@@ -1,10 +1,12 @@
-[gd_resource type="Resource" script_class="ShipPart" load_steps=2 format=3 uid="uid://bsor8c3u1evdj"]
+[gd_resource type="Resource" script_class="ShipPart" load_steps=3 format=3 uid="uid://bsor8c3u1evdj"]
 
+[ext_resource type="Texture2D" uid="uid://d2uuh1c8ag8xv" path="res://Resources/Sprite/Icon14_13.png" id="1_p7wq0"]
 [ext_resource type="Script" uid="uid://jpox0wadtk7m" path="res://Scripts/Data/ShipPart.gd" id="1_s60en"]
 
 [resource]
 script = ExtResource("1_s60en")
+icon = ExtResource("1_p7wq0")
 part_name = "Basic Fin"
 part_type = 2
 mass = 1.0
-stability = 1.0
+stability = 2.0

@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Towards the Edge of Light"
-run/main_scene="uid://x6e0pm3ougu8"
+run/main_scene="uid://lyt65h7ygtge"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 GravityManager="*res://Scripts/GravityManager.gd"
 GameState="*res://Scripts/GameState.gd"
+GlobalMusic="*res://Scenes/GlobalMusic.tscn"
 
 [display]
 

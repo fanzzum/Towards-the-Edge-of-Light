@@ -1,10 +1,12 @@
-[gd_resource type="Resource" script_class="ShipPart" load_steps=2 format=3 uid="uid://4kkvddwy2g2p"]
+[gd_resource type="Resource" script_class="ShipPart" load_steps=3 format=3 uid="uid://4kkvddwy2g2p"]
 
+[ext_resource type="Texture2D" uid="uid://cr10atcoo17ty" path="res://Resources/Sprite/Icon14_25.png" id="1_57fkd"]
 [ext_resource type="Script" uid="uid://jpox0wadtk7m" path="res://Scripts/Data/ShipPart.gd" id="1_568ak"]
 
 [resource]
 script = ExtResource("1_568ak")
+icon = ExtResource("1_57fkd")
 part_name = "Basic Sensor"
 part_type = 1
 mass = 1.0
-sensor_quality = 1.0
+sensor_quality = 2.0

@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="ShipPart" load_steps=3 format=3 uid="uid://isj6fc60afmt"]
+
+[ext_resource type="Texture2D" uid="uid://dggdcbtoy2g34" path="res://Resources/Sprite/Icon14_12.png" id="1_g3vd2"]
+[ext_resource type="Script" uid="uid://jpox0wadtk7m" path="res://Scripts/Data/ShipPart.gd" id="1_hdrr3"]
+
+[resource]
+script = ExtResource("1_hdrr3")
+icon = ExtResource("1_g3vd2")
+part_name = "Precision Sensor"
+part_type = 1
+mass = 1.8
+sensor_quality = 5.0

@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="ShipData" load_steps=15 format=3 uid="uid://4x7xbi2n03hx"]
+[gd_resource type="Resource" script_class="ShipData" load_steps=13 format=3 uid="uid://4x7xbi2n03hx"]
 
 [ext_resource type="Script" uid="uid://dadxvgn1ynbik" path="res://Scripts/Data/ShipData.gd" id="1_s106s"]
 [ext_resource type="Script" uid="uid://bhon85exanspx" path="res://Scripts/Data/ShipSocket.gd" id="2_0quau"]
@@ -6,7 +6,6 @@
 [ext_resource type="Resource" uid="uid://4kkvddwy2g2p" path="res://Resources/BasicSensor.tres" id="4_76c0q"]
 [ext_resource type="Resource" uid="uid://bsor8c3u1evdj" path="res://Resources/BasicFin.tres" id="5_evxw4"]
 [ext_resource type="Resource" uid="uid://bm45o3ylncnqx" path="res://Resources/BasicArmor.tres" id="6_tf574"]
-[ext_resource type="Resource" uid="uid://30ohv4ua1w8d" path="res://Resources/BasicLandingGear.tres" id="7_8hcpy"]
 [ext_resource type="Script" uid="uid://jpox0wadtk7m" path="res://Scripts/Data/ShipPart.gd" id="8_evxw4"]
 
 [sub_resource type="Resource" id="Resource_73hu2"]
@@ -38,12 +37,6 @@ socket_type = 3
 installed_part = ExtResource("6_tf574")
 metadata/_custom_type_script = "uid://bhon85exanspx"
 
-[sub_resource type="Resource" id="Resource_nrrgv"]
-script = ExtResource("2_0quau")
-socket_type = 4
-installed_part = ExtResource("7_8hcpy")
-metadata/_custom_type_script = "uid://bhon85exanspx"
-
 [resource]
 script = ExtResource("1_s106s")
-sockets = Array[ExtResource("2_0quau")]([SubResource("Resource_73hu2"), SubResource("Resource_76c0q"), SubResource("Resource_evxw4"), SubResource("Resource_tf574"), SubResource("Resource_8hcpy"), SubResource("Resource_nrrgv")])
+sockets = Array[ExtResource("2_0quau")]([SubResource("Resource_73hu2"), SubResource("Resource_76c0q"), SubResource("Resource_evxw4"), SubResource("Resource_tf574"), SubResource("Resource_8hcpy")])

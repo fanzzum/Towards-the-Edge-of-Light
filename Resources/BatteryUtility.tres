@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ShipPart" load_steps=3 format=3 uid="uid://g6ah0itclkba"]
+
+[ext_resource type="Texture2D" uid="uid://df66aymfn2buc" path="res://Resources/Sprite/Icon14_09.png" id="1_kyueq"]
+[ext_resource type="Script" uid="uid://jpox0wadtk7m" path="res://Scripts/Data/ShipPart.gd" id="1_rdvr3"]
+
+[resource]
+script = ExtResource("1_rdvr3")
+icon = ExtResource("1_kyueq")
+part_name = "Battery Utility"
+part_type = 3
+mass = 2.5

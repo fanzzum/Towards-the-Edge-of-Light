@@ -1,14 +1,15 @@
-[gd_scene load_steps=26 format=3 uid="uid://x6e0pm3ougu8"]
+[gd_scene load_steps=27 format=3 uid="uid://x6e0pm3ougu8"]
 
 [ext_resource type="PackedScene" uid="uid://galiymsptp1r" path="res://Scenes/Flight/Planet.tscn" id="1_idj7w"]
 [ext_resource type="PackedScene" uid="uid://d3soghehntgbt" path="res://Scenes/Flight/Ship.tscn" id="2_kln2b"]
 [ext_resource type="Script" uid="uid://bq51nwbgaqdcb" path="res://Scripts/DebugHUD.gd" id="3_kln2b"]
-[ext_resource type="Resource" uid="uid://4x7xbi2n03hx" path="res://Resources/DefaultShip.tres" id="4_jw32o"]
 [ext_resource type="Script" uid="uid://n26yt6tck66o" path="res://Scripts/CameraController.gd" id="4_rgh2o"]
 [ext_resource type="Script" uid="uid://yjr40w8pm6mb" path="res://Scripts/Managers/WorldGenerator.gd" id="7_jw32o"]
 [ext_resource type="Texture2D" uid="uid://dg1q25au136h7" path="res://Assets/Planets/Planet_0.png" id="8_grg3l"]
 [ext_resource type="Texture2D" uid="uid://cvt4f1hajngmg" path="res://Assets/Planets/Planet_1.png" id="9_frkhe"]
+[ext_resource type="PackedScene" uid="uid://cfq31xsavok4j" path="res://Scenes/Interactables/Beacon.tscn" id="9_vy5pj"]
 [ext_resource type="Texture2D" uid="uid://d4dnggmsx23io" path="res://Assets/Planets/Planet_2.png" id="10_1p5hy"]
+[ext_resource type="Texture2D" uid="uid://b5wvr5ocv6qrb" path="res://Resources/Sprite/spacebg3.jpeg" id="10_bmxlf"]
 [ext_resource type="Texture2D" uid="uid://b5l16dwhmvsqh" path="res://Assets/Planets/Planet_3.png" id="11_h1m7h"]
 [ext_resource type="Texture2D" uid="uid://b3inupvk0rppl" path="res://Assets/Planets/Planet_4.png" id="12_erwvk"]
 [ext_resource type="Texture2D" uid="uid://bwd6fgdgpmjh4" path="res://Assets/Planets/Planet_5.png" id="13_aht7i"]
@@ -29,8 +30,7 @@
 [node name="Main" type="Node2D"]
 
 [node name="Ship" parent="." instance=ExtResource("2_kln2b")]
-position = Vector2(496, -237)
-ship_data = ExtResource("4_jw32o")
+position = Vector2(750, -345)
 
 [node name="HUD" type="CanvasLayer" parent="."]
 
@@ -44,6 +44,19 @@ ship = NodePath("../../Ship")
 position = Vector2(405, -236)
 script = ExtResource("4_rgh2o")
 target = NodePath("../Ship")
+
+[node name="Beacon" parent="." instance=ExtResource("9_vy5pj")]
+position = Vector2(1005, 155)
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="DeepSpaceStars" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0, 0)
+
+[node name="TextureRect" type="TextureRect" parent="ParallaxBackground/DeepSpaceStars"]
+offset_right = 1283.5555
+offset_bottom = 722.0
+texture = ExtResource("10_bmxlf")
 
 [node name="WorldGenerator" type="Node" parent="."]
 script = ExtResource("7_jw32o")

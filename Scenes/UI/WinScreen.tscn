@@ -1,0 +1,58 @@
+[gd_scene load_steps=2 format=3 uid="uid://dlt6bgi8p18pm"]
+
+[ext_resource type="Script" uid="uid://djvy4hwytr2rq" path="res://Scenes/UI/win_screen.gd" id="1_p4kt1"]
+
+[node name="WinScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_p4kt1")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 1290.0
+offset_bottom = 736.0
+color = Color(0.11, 0.12833332, 0.22, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 50
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 9.0
+offset_top = 36.0
+offset_right = 1267.0
+offset_bottom = 398.0
+grow_horizontal = 2
+alignment = 1
+
+[node name="StoryText" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "SIGNAL VERIFIED...
+DOCKING SEQUENCE COMPLETE...
+
+Against all odds, your jury-rigged ship held together. Through asteroid belts, crushing gravity wells, and endless void, you navigated your way back to safe territory.
+
+The long voyage is over. You are home."
+horizontal_alignment = 1
+
+[node name="ReturnButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 545.0
+offset_top = 482.0
+offset_right = 718.0
+offset_bottom = 513.0
+text = "Return to Main Menu"
+
+[connection signal="pressed" from="ReturnButton" to="." method="_on_return_button_pressed"]

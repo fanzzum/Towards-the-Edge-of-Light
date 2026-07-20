@@ -1,10 +1,11 @@
-[gd_resource type="Resource" script_class="ShipPart" load_steps=2 format=3 uid="uid://bm45o3ylncnqx"]
+[gd_resource type="Resource" script_class="ShipPart" load_steps=3 format=3 uid="uid://bm45o3ylncnqx"]
 
+[ext_resource type="Texture2D" uid="uid://c0vb708vss88" path="res://Resources/Sprite/Icon14_34.png" id="1_kepom"]
 [ext_resource type="Script" uid="uid://jpox0wadtk7m" path="res://Scripts/Data/ShipPart.gd" id="1_moesc"]
 
 [resource]
 script = ExtResource("1_moesc")
+icon = ExtResource("1_kepom")
 part_name = "Basic Armor"
 part_type = 3
-mass = 3.0
-stability = 4.0
+mass = 5.0

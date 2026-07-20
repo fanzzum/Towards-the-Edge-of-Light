@@ -8,6 +8,7 @@ enum PartType {
 	PLATING,
 	LANDING_GEAR
 }
+@export var icon: Texture2D
 
 @export var part_name : String = ""
 
@@ -28,5 +29,3 @@ var description : String = ""
 # Art
 
 @export var sprite : Texture2D
-
-@export var icon : Texture2D

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ShipPart" load_steps=3 format=3 uid="uid://0iic8k1ch7ab"]
+
+[ext_resource type="Texture2D" uid="uid://cy3gkykl21bqt" path="res://Resources/Sprite/Icon31_09.png" id="1_i80gj"]
+[ext_resource type="Script" uid="uid://jpox0wadtk7m" path="res://Scripts/Data/ShipPart.gd" id="1_pkv6l"]
+
+[resource]
+script = ExtResource("1_pkv6l")
+icon = ExtResource("1_i80gj")
+part_name = "Vector Thruster"
+mass = 3.5
+thrust = 13.0

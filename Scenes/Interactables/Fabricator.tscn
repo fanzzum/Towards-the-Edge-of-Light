@@ -2,23 +2,32 @@
 
 [ext_resource type="Script" uid="uid://b8o7inerlv4ru" path="res://Scripts/Fabricator.gd" id="1_u1lug"]
 [ext_resource type="PackedScene" uid="uid://dc8ju4b63ctfv" path="res://Scenes/Interactables/FabricatorUI.tscn" id="2_fui1h"]
-[ext_resource type="Script" uid="uid://wg8affdkba00" path="res://Scripts/FabricatorUI.gd" id="3_u3wlo"]
+[ext_resource type="Texture2D" uid="uid://dwftj52xns3vp" path="res://Resources/Sprite/Icon14_40.png" id="3_u3wlo"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h0whh"]
-size = Vector2(129, 180)
+size = Vector2(192, 180)
 
 [node name="Fabricator" type="Area2D"]
+texture_filter = 1
 script = ExtResource("1_u1lug")
 
-[node name="ColorRect" type="ColorRect" parent="."]
-offset_right = 64.0
-offset_bottom = 128.0
-color = Color(1, 0.91066664, 0.32999998, 1)
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(28.5, 49)
+texture_filter = 1
+position = Vector2(33, 49)
 shape = SubResource("RectangleShape2D_h0whh")
 
 [node name="FabricatorUI" parent="." instance=ExtResource("2_fui1h")]
 visible = false
-script = ExtResource("3_u3wlo")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(28, 54)
+scale = Vector2(4.78125, 4.78125)
+texture = ExtResource("3_u3wlo")
+
+[node name="PromptLabel" type="Label" parent="."]
+visible = false
+offset_left = -34.0
+offset_top = -78.0
+offset_right = 156.0
+offset_bottom = -55.0
+text = "Press F to use Fabricator"

@@ -1,7 +1,21 @@
 extends Area2D
 
+@onready var prompt_label = $Label
+
+var player_inside: bool = false
+
 func _on_body_entered(body: Node2D) -> void:
 	if body.name == "Explorer":
-		print("Kicking off back to space!")
-		# Replace this string with the exact path to your main space/flight scene
+		player_inside = true
+		print("Press 'Scan' or 'E' to Kick Off!")
+		prompt_label.visible = true
+
+func _on_body_exited(body: Node2D) -> void:
+	if body.name == "Explorer":
+		player_inside = false
+		prompt_label.visible = false
+
+func _process(_delta: float) -> void:
+	if player_inside and Input.is_action_just_pressed("scan"):
+		print("Launching into space from current planet...")
 		get_tree().change_scene_to_file("res://Scenes/Main.tscn")
