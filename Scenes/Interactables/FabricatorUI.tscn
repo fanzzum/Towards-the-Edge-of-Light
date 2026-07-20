@@ -1,0 +1,95 @@
+[gd_scene load_steps=2 format=3 uid="uid://dc8ju4b63ctfv"]
+
+[ext_resource type="Script" uid="uid://wg8affdkba00" path="res://Scripts/FabricatorUI.gd" id="1_4ygj8"]
+
+[node name="FabricatorUI" type="CanvasLayer"]
+script = ExtResource("1_4ygj8")
+
+[node name="Panel" type="Panel" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -400.0
+offset_top = -300.0
+offset_right = 400.0
+offset_bottom = 300.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GridContainer" type="GridContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -196.0
+offset_top = -68.0
+offset_right = 196.0
+offset_bottom = 68.0
+grow_horizontal = 2
+grow_vertical = 2
+columns = 3
+
+[node name="thruster_power" type="Button" parent="Panel/GridContainer"]
+layout_mode = 2
+text = "Power Thruster"
+
+[node name="thruster_vector" type="Button" parent="Panel/GridContainer"]
+layout_mode = 2
+text = "Vector Thruster"
+
+[node name="thruster_efficiency" type="Button" parent="Panel/GridContainer"]
+layout_mode = 2
+text = "Efficiency Thruster"
+
+[node name="sensor_wide" type="Button" parent="Panel/GridContainer"]
+layout_mode = 2
+text = "Wide Sensor"
+
+[node name="sensor_precision" type="Button" parent="Panel/GridContainer"]
+layout_mode = 2
+text = "Precision Sensor"
+
+[node name="sensor_long" type="Button" parent="Panel/GridContainer"]
+layout_mode = 2
+text = "Long Sensor"
+
+[node name="stabilizer_gyro" type="Button" parent="Panel/GridContainer"]
+layout_mode = 2
+text = "Gyro Stabilizer"
+
+[node name="stabilizer_reaction" type="Button" parent="Panel/GridContainer"]
+layout_mode = 2
+text = "Reaction Stabilizer"
+
+[node name="stabilizer_balanced" type="Button" parent="Panel/GridContainer"]
+layout_mode = 2
+text = "Balanced Stabilizer"
+
+[node name="utility_armor" type="Button" parent="Panel/GridContainer"]
+layout_mode = 2
+text = "Armor Utility"
+
+[node name="utility_cargo" type="Button" parent="Panel/GridContainer"]
+layout_mode = 2
+text = "Cargo Utility"
+
+[node name="utility_battery" type="Button" parent="Panel/GridContainer"]
+layout_mode = 2
+text = "Battery Utility"
+
+[connection signal="pressed" from="Panel/GridContainer/thruster_power" to="." method="_on_part_pressed" binds= ["thruster_power"]]
+[connection signal="pressed" from="Panel/GridContainer/thruster_vector" to="." method="_on_part_pressed" binds= ["thruster_vector"]]
+[connection signal="pressed" from="Panel/GridContainer/thruster_efficiency" to="." method="_on_part_pressed" binds= ["thruster_efficiency"]]
+[connection signal="pressed" from="Panel/GridContainer/sensor_wide" to="." method="_on_part_pressed" binds= ["sensor_wide"]]
+[connection signal="pressed" from="Panel/GridContainer/sensor_precision" to="." method="_on_part_pressed" binds= ["sensor_precision"]]
+[connection signal="pressed" from="Panel/GridContainer/sensor_long" to="." method="_on_part_pressed" binds= ["sensor_long"]]
+[connection signal="pressed" from="Panel/GridContainer/stabilizer_gyro" to="." method="_on_part_pressed" binds= ["stabilizer_gyro"]]
+[connection signal="pressed" from="Panel/GridContainer/stabilizer_reaction" to="." method="_on_part_pressed" binds= ["stabilizer_reaction"]]
+[connection signal="pressed" from="Panel/GridContainer/stabilizer_balanced" to="." method="_on_part_pressed" binds= ["stabilizer_balanced"]]
+[connection signal="pressed" from="Panel/GridContainer/utility_armor" to="." method="_on_part_pressed" binds= ["utility_armor"]]
+[connection signal="pressed" from="Panel/GridContainer/utility_cargo" to="." method="_on_part_pressed" binds= ["utility_cargo"]]
+[connection signal="pressed" from="Panel/GridContainer/utility_battery" to="." method="_on_part_pressed" binds= ["utility_battery"]]

@@ -20,3 +20,7 @@ shape = SubResource("RectangleShape2D_ln1di")
 [node name="TrajectoryLine" type="Line2D" parent="."]
 width = 2.0
 default_color = Color(0, 1, 1, 1)
+
+[node name="GhostLine" type="Line2D" parent="."]
+width = 2.0
+default_color = Color(0.44099998, 0.45044994, 0.63, 1)

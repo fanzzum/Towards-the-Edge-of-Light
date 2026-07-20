@@ -1,51 +1,33 @@
 extends CharacterBody2D
 
-const BlueprintUI = preload("res://Scenes/UI/BlueprintChoice.tscn")
+const SPEED = 300.0
+const JUMP_VELOCITY = -400.0
+# Hardcoded gravity fallback vector for pixel-space mechanics
+const FALLBACK_GRAVITY = 980.0 
 
-@export var walk_speed := 150.0
-var is_active := false
-var active_ruin: Area2D = null
+@onready var start_scale_x: float = $Sprite2D.scale.x
 
-func _physics_process(_delta):
-	if not is_active:
-		return
+func _physics_process(delta: float) -> void:
+	# 1. Apply robust gravity fallback
+	if not is_on_floor():
+		velocity.y += FALLBACK_GRAVITY * delta
 
-	var input_dir = Input.get_vector("move_left", "move_right", "move_up", "move_down")
-	velocity = input_dir * walk_speed
+	# 2. Handle Jump input
+	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
+		velocity.y = JUMP_VELOCITY
+
+	# 3. Calculate horizontal movement using your input map names
+	var direction := Input.get_axis("move_left", "move_right")
+	
+	if direction:
+		velocity.x = direction * SPEED
+		# Flip the sprite visuals cleanly
+		if direction > 0:
+			$Sprite2D.scale.x = start_scale_x
+		elif direction < 0:
+			$Sprite2D.scale.x = -start_scale_x
+	else:
+		velocity.x = move_toward(velocity.x, 0, SPEED)
+
+	# 4. Execute movement loops
 	move_and_slide()
-
-
-
-func set_active_ruin(ruin: Area2D):
-	active_ruin = ruin
-
-
-
-func _unhandled_input(event):
-	if not is_active:
-		return
-		
-	# Find the ship in the active scene tree
-	var ship = get_tree().current_scene.get_node_or_null("Ship")
-	if ship == null:
-		ship = get_tree().current_scene.find_child("Ship")
-		
-	if ship == null:
-		return
-
-	# Must be standing near the ship to interact with it
-	var near_ship = global_position.distance_to(ship.global_position) < 150.0
-
-	if near_ship:
-		# Press Spacebar to board the ship and take off
-		if event.is_action_pressed("initiate_landing"):
-			ship.initiate_takeoff()
-			
-		# Press 'B' to open the modular Ship Builder menu directly at the hull
-		if event is InputEventKey and event.pressed and event.keycode == KEY_B:
-			is_active = false
-			velocity = Vector2.ZERO
-			
-			var builder = load("res://Scenes/UI/ShipBuilder.tscn").instantiate()
-			get_tree().current_scene.add_child(builder)
-			builder.open(ship.ship_data)

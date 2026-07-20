@@ -22,6 +22,22 @@ func _ready():
 	generate_system()
 
 func generate_system():
+	# --- Generate the Home Planet ---
+	var home_planet = planet_scene.instantiate()
+	home_planet.global_position = Vector2.ZERO # Center of the map
+	home_planet.scale = Vector2(6.0, 6.0)
+	
+	var home_data = PlanetData.new()
+	home_data.planet_name = "Home"
+	home_data.gravity_strength = 60000.0 
+	home_data.gravity_radius = 2000.0
+	home_data.landing_radius = 200.0 # Make it easy to land on
+	home_planet.data = home_data
+	
+	# Home planet shouldn't give scan rewards
+	home_planet.is_scannable = false 
+	
+	add_child(home_planet)
 	# --- Generate the 20 Planets ---
 	for ring_index in range(ring_distances.size()):
 		var distance = ring_distances[ring_index]
@@ -41,7 +57,7 @@ func generate_system():
 			var new_data = PlanetData.new()
 			
 			# Scale gravity strength based on the ring tier
-			new_data.gravity_strength = 400000.0 * (ring_index + 1)
+			new_data.gravity_strength = 80000.0 * (ring_index + 1)
 			new_data.gravity_radius = 3000.0 + (ring_index * 200.0)
 			new_data.planet_radius = 100.0
 			

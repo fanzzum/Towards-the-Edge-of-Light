@@ -32,9 +32,9 @@
 position = Vector2(496, -237)
 ship_data = ExtResource("4_jw32o")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="HUD" type="CanvasLayer" parent="."]
 
-[node name="DebugHUD" type="Label" parent="CanvasLayer" node_paths=PackedStringArray("ship")]
+[node name="DebugHUD" type="Label" parent="HUD" node_paths=PackedStringArray("ship")]
 offset_right = 40.0
 offset_bottom = 23.0
 script = ExtResource("3_kln2b")

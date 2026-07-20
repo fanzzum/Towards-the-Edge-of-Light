@@ -6,7 +6,10 @@ extends StaticBody2D
 @onready var orbit_visual: Sprite2D = $OrbitVisual
 var is_scannable: bool = true
 var is_player_in_range: bool = false
-
+@export var titanium_yield: int = 5
+@export var lead_yield: int = 2
+@export var silver_yield: int = 0
+@export var copper_yield: int = 0
 
 var frame_timer: float = 0.0
 @export var animation_speed: float = 0.1 # Seconds per frame

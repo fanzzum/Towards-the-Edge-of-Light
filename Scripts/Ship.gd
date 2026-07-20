@@ -5,6 +5,7 @@ var launch_data := LaunchData.new()
 var ship_stats := ShipStats.new()
 var hp: float = 100.0
 var armor_threshold: float = 200.0
+@onready var ghost_line: Line2D = $GhostLine
 
 const ExplorerScene = preload("res://Scenes/Character/Explorer.tscn")
 var spawned_explorer: CharacterBody2D = null
@@ -72,8 +73,7 @@ func trigger_destruction():
 	cargo = {"titanium": 0, "lead": 0, "silver": 0, "copper": 0} 
 	hp = 100.0
 	velocity_vector = Vector2.ZERO
-	# global_position = Vector2(0, 0) # Replace with exact Home pad coordinates
-
+	get_tree().change_scene_to_file("res://Scenes/Surface/SurfaceMap.tscn")
 
 func _process(delta):
 	# Find if we are inside any planet's scan zone
@@ -227,15 +227,42 @@ func calculate_moment_of_inertia():
 		
 func complete_scan(planet):
 	scan_timer = 0.0
-	planet.is_scannable = false # Prevents infinite farming of the same planet
+	planet.is_scannable = false 
 
-	# Add the hardcoded materials to the ship's cargo
 	if planet.data and planet.data.scan_rewards:
+		# Send directly to global GameState so the Fabricator can use them!
+		GameState.titanium += planet.data.scan_rewards.titanium
+		GameState.lead += planet.data.scan_rewards.lead
+		GameState.silver += planet.data.scan_rewards.silver
+		GameState.copper += planet.data.scan_rewards.copper
+		
+		# Keep local cargo updated just for your DebugHUD to read
 		cargo["titanium"] += planet.data.scan_rewards.titanium
 		cargo["lead"] += planet.data.scan_rewards.lead
 		cargo["silver"] += planet.data.scan_rewards.silver
 		cargo["copper"] += planet.data.scan_rewards.copper
 
-		print("Scan complete! Current Cargo: ", cargo)
-	else:
-		print("Scan complete, but this planet has no MaterialData assigned!")
+		print("Scan complete! GameState Titanium: ", GameState.titanium)
+
+
+
+func apply_equipped_parts() -> void:
+	# Matches new parts from GameState to the correct sockets in ship_data
+	for socket_name in GameState.equipped_parts:
+		var new_part = GameState.equipped_parts[socket_name]
+		for socket in ship_data.sockets:
+			# If the socket's current part type matches the new part type, overwrite it!
+			if socket.installed_part != null and socket.installed_part.part_type == new_part.part_type:
+				socket.installed_part = new_part
+
+
+func draw_ghost_line(target_pos: Vector2):
+	ghost_line.clear_points()
+	var sim_pos = global_position
+	var sim_vel = (target_pos - global_position).normalized() * 500.0 # Estimate 500 speed
+	var dt = 1.0 / 60.0
+	
+	for i in range(100): # Predict 100 steps
+		sim_vel += GravityManager.calculate_gravity(sim_pos) * dt
+		sim_pos += sim_vel * dt
+		ghost_line.add_point(to_local(sim_pos))
